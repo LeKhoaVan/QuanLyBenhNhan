@@ -5,8 +5,12 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -15,6 +19,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 import java.awt.Component;
 import javax.swing.border.TitledBorder;
@@ -36,6 +41,13 @@ public class TrangChuView extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTable table;
+	private static JList<String> jList_msg_area;
+	
+	static Socket s;
+    static DataInputStream din;
+    static DataOutputStream dout;
+    
+    static DefaultListModel dm = new DefaultListModel();
 
 	/**
 	 * Launch the application.
@@ -51,6 +63,19 @@ public class TrangChuView extends JFrame {
 				}
 			}
 		});
+		try {
+			s = new Socket("127.0.0.1",1201);
+            din = new DataInputStream(s.getInputStream());
+            dout = new DataOutputStream(s.getOutputStream());
+            String msgin="";
+            while(!msgin.equals("exit")){
+                msgin = din.readUTF();
+                jList_msg_area.setModel(dm);
+                dm.addElement("\t"+msgin+"\t");
+            }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	/**
@@ -130,22 +155,22 @@ public class TrangChuView extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JList listPatient = new JList();
-		listPatient.setForeground(new Color(0, 128, 255));
-		listPatient.setBackground(new Color(255, 255, 255));
-		listPatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listPatient.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		listPatient.setBounds(10, 22, 211, 546);
-		listPatient.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Patient1_123456789", "Patient2_123456789", "Patient3_123456789", "Patient4_123456789", "Patient5_123456789", "Patient6_123456789"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		panel_1.add(listPatient);
+		jList_msg_area = new JList();
+		jList_msg_area.setForeground(new Color(0, 128, 255));
+		jList_msg_area.setBackground(new Color(255, 255, 255));
+		jList_msg_area.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		jList_msg_area.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jList_msg_area.setBounds(10, 22, 211, 546);
+		
+		/*
+		 * jList_msg_area.setModel(new AbstractListModel() { String[] values = new
+		 * String[] {"Patient1_123456789", "Patient2_123456789", "Patient3_123456789",
+		 * "Patient4_123456789", "Patient5_123456789", "Patient6_123456789"}; public int
+		 * getSize() { return values.length; } public Object getElementAt(int index) {
+		 * return values[index]; } });
+		 */
+		 
+		panel_1.add(jList_msg_area);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Qu\u1EA3n l\u00FD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -168,10 +193,27 @@ public class TrangChuView extends JFrame {
 		textField.setBounds(239, 80, 179, 25);
 		panel_4.add(textField);
 		
-		JButton btnThem = new JButton("Th\u00EAm");
+		jList_msg_area.addMouseListener(new java.awt.event.MouseAdapter() {
+			
+		});
+		
+		JButton btnThem = new JButton("Gọi Khám");
 		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnThem.setBounds(226, 216, 89, 23);
+		btnThem.setBounds(206, 216, 103, 23);
 		panel_4.add(btnThem);
+		btnThem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String msgout = "";
+					msgout = "\nMời bệnh nhân\n" + jList_msg_area.getSelectedValue().toString().trim() + "\nlên phòng khám\n";
+		            dout.writeUTF(msgout);
+		            dm.remove(jList_msg_area.getSelectedIndex());
+		            jList_msg_area.setModel(dm);
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		});
 		
 		JButton btnXoa = new JButton("Xo\u00E1");
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 16));
