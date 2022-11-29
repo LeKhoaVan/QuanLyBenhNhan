@@ -1,4 +1,4 @@
-package view;
+package iuh.ktpm14.view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -19,7 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class QuanLyBenhAnView extends JFrame {
+public class QuanLyBenhAnView extends JPanel {
 
 	private JPanel contentPane;
 	private JTextField tfTen;
@@ -48,18 +48,22 @@ public class QuanLyBenhAnView extends JFrame {
 	 * Create the frame.
 	 */
 	public QuanLyBenhAnView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 801, 581);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		//setContentPane(contentPane);
+		//contentPane.setLayout(null);
+		//add(contentPane);
+		setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 785, 542);
-		contentPane.add(panel);
+		//contentPane.add(panel);
+		add(panel);
 		
 		JLabel lblTnBnhNhn = new JLabel("T\u00EAn b\u1EC7nh nh\u00E2n: ");
 		lblTnBnhNhn.setFont(new Font("Tahoma", Font.PLAIN, 16));

@@ -1,4 +1,4 @@
-package view;
+package iuh.ktpm14.view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.TitledBorder;
 
-public class QuanLyPhieuKhamView extends JFrame {
+public class QuanLyPhieuKhamView extends JPanel {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -49,18 +49,22 @@ public class QuanLyPhieuKhamView extends JFrame {
 	 * Create the frame.
 	 */
 	public QuanLyPhieuKhamView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 798, 575);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1150, 810);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBorder(new EmptyBorder(5,5,5,5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		//setContentPane(contentPane);
+		add(contentPane);
+		//contentPane.setLayout(null);
+		setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 785, 536);
-		contentPane.add(panel);
+		//contentPane.add(panel);
+		add(panel);
 		
 		JLabel lblTnBnhNhn = new JLabel("T\u00EAn b\u1EC7nh nh\u00E2n: ");
 		lblTnBnhNhn.setFont(new Font("Tahoma", Font.PLAIN, 16));

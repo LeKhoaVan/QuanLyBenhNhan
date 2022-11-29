@@ -1,4 +1,4 @@
-package view;
+package iuh.ktpm14.server;
 
 import java.awt.EventQueue;
 
@@ -24,6 +24,10 @@ import java.awt.Color;
 
 public class FormThemBenhAn extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField msg_textHoTen;
 	private JTextField msg_textTuoi;
@@ -64,7 +68,7 @@ public class FormThemBenhAn extends JFrame {
                 msg_area.setText(msg_area.getText().trim()+"\n"+msgin);
             }
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 	}
 

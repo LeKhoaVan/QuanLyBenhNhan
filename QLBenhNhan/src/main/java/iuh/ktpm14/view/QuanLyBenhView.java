@@ -1,4 +1,4 @@
-package view;
+package iuh.ktpm14.view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class QuanLyBenhView extends JFrame {
+public class QuanLyBenhView extends JPanel {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -44,18 +44,21 @@ public class QuanLyBenhView extends JFrame {
 	 * Create the frame.
 	 */
 	public QuanLyBenhView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 799, 581);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPane = new JPanel();
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		
+		//contentPane.setLayout(null);
+		setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 783, 542);
-		contentPane.add(panel);
+		//contentPane.add(panel);
+		add(panel);
 		
 		JLabel lblTenBenh = new JLabel("T\u00EAn b\u1EC7nh: ");
 		lblTenBenh.setFont(new Font("Tahoma", Font.PLAIN, 16));
