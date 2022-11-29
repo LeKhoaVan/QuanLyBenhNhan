@@ -1,4 +1,4 @@
-package view;
+package iuh.ktpm14.view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -21,7 +21,7 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class QuanLyToaThuocView extends JFrame {
+public class QuanLyToaThuocView extends JPanel {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -48,18 +48,14 @@ public class QuanLyToaThuocView extends JFrame {
 	 * Create the frame.
 	 */
 	public QuanLyToaThuocView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 814, 691);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
+		setBounds(100, 100, 814, 691);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBounds(0, 0, 798, 652);
-		contentPane.add(panel);
+		add(panel);
 		
 		JLabel lblNgyLpToa = new JLabel("Ng\u00E0y l\u1EADp toa thu\u1ED1c:");
 		lblNgyLpToa.setFont(new Font("Tahoma", Font.PLAIN, 16));

@@ -1,4 +1,4 @@
-package view;
+package iuh.ktpm14.view;
 
 import java.awt.EventQueue;
 
@@ -21,7 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class QuanLyThuocView extends JFrame {
+public class QuanLyThuocView extends JPanel {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -48,17 +48,18 @@ public class QuanLyThuocView extends JFrame {
 	 * Create the frame.
 	 */
 	public QuanLyThuocView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 809, 614);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		//setContentPane(contentPane);
+		
+		setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 795, 580);
-		contentPane.add(panel);
+		add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblTenThuoc = new JLabel("T\u00EAn thu\u1ED1c: ");
