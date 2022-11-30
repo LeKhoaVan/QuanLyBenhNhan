@@ -19,7 +19,13 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
 import iuh.ktpm14.connect.ConnectDB;
+
 import iuh.ktpm14.entity.ChiTietToaThuoc;
+
+import iuh.ktpm14.entity.Benh;
+
+import iuh.ktpm14.entity.PhieuKham;
+
 import iuh.ktpm14.entity.Thuoc;
 import iuh.ktpm14.entity.ToaThuoc;
 
@@ -139,6 +145,29 @@ public class ToaThuocServiceImpl implements ToaThuocService{
 		Document document = new Document().append("thuoc",documentThuoc).append("so_luong", chiTietToaThuoc.getSo_luong());
 		database.getCollection("ChiTietToaThuoc").insertOne(document);
 	}
+
+	public void addToaThuoc(ToaThuoc toaThuoc) {
+		ConnectDB connectDB = new ConnectDB();
+		MongoClient client = connectDB.connect();
+		MongoDatabase database = connectDB.createDatabase(client, "QLKhamBenh");
+		
+		
+		Benh benh = toaThuoc.getBenh();
+		PhieuKham phieuKham = toaThuoc.getPhieuKham();
+		List<ChiTietToaThuoc> chiTietToaThuocs = toaThuoc.getChiTietToaThuocs();
+		List<Document> listChiTiet = new ArrayList<Document>();
+		chiTietToaThuocs.forEach(ct->{
+			Document docChiTiet = new Document().append("thuoc", ct.getThuoc()).append("so_luong", ct.getSo_luong());
+			listChiTiet.add(docChiTiet);
+		});
+		Document documentId = new Document().append("_id", toaThuoc.get_id().get());
+		Document docBenh = new Document().append("_id", benh.getId().get()).append("ten_benh", benh.getTenBenh());
+		Document docPhieuKham = new Document().append("_id", phieuKham.getId()).append("ma_ho_so", phieuKham.getMaHoSoBA());
+//		Document documentThuoc = new Document().append("_id", documentId).append("ten_thuoc", thuoc.getTen_thuoc()).append("huong_dan", thuoc.getHuong_dan());
+		Document document = new Document().append("_id", documentId).append("benh",docBenh).append("chi_tiet", listChiTiet);
+		database.getCollection("ToaThuoc").insertOne(document);
+	}
+
 	
 	public boolean deleteChiTiet(String id) {
 		ConnectDB connectDB = new ConnectDB();
@@ -169,3 +198,4 @@ public class ToaThuocServiceImpl implements ToaThuocService{
 		System.out.println(chiTietToaThuoc2);
 	}
 }
+

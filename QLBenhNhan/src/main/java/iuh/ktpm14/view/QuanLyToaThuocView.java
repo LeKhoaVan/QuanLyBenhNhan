@@ -5,20 +5,32 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.Date;
+
+import java.time.format.DateTimeFormatter;
+
 import java.util.Vector;
 
 import javax.print.Doc;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JScrollPane;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
+
+
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
 
 import org.bson.Document;
 
@@ -27,6 +39,10 @@ import com.mongodb.client.MongoDatabase;
 
 import iuh.ktpm14.connect.ConnectDB;
 import iuh.ktpm14.entity.ChiTietToaThuoc;
+
+import iuh.ktpm14.entity.ChiTietToaThuoc;
+import iuh.ktpm14.entity.HoSoBenhAn;
+
 import iuh.ktpm14.entity.Thuoc;
 import iuh.ktpm14.service.ThuocServiceImpl;
 import iuh.ktpm14.service.ToaThuocServiceImpl;
@@ -40,11 +56,16 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 	private DefaultTableModel model1;
 	private DefaultTableModel model2;
 	private DefaultTableModel model3;
-	private JButton btnThem;
-	private JButton btnXoa;
 	private ThuocServiceImpl thuocServiceImpl = new ThuocServiceImpl();
 	private ToaThuocServiceImpl toaThuocServiceImpl = new ToaThuocServiceImpl();
 	private JTable table_2;
+
+	private DefaultTableModel dtf;
+	private JButton btnThem;
+	private JButton btnXoa;
+	private AbstractButton textField;
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -88,10 +109,25 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 		tfNgayLap.setText(date.toString());
 		panel.add(tfNgayLap);
 		
+
 		JButton btnXuatPhieu = new JButton("Xu\u1EA5t phi\u1EBFu");
 		btnXuatPhieu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnXuatPhieu.setBounds(549, 80, 197, 23);
 		panel.add(btnXuatPhieu);
+
+		JButton btnXutPhiuKhm = new JButton("Xu\u1EA5t phi\u1EBFu");
+		btnXutPhiuKhm.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnXutPhiuKhm.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		btnXutPhiuKhm.setBounds(549, 80, 197, 23);
+		panel.add(btnXutPhiuKhm);
+
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Danh s\u00E1ch thu\u1ED1c", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -100,6 +136,7 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 		
 		table = new JTable();
 		table.setModel(model1 = new DefaultTableModel(
+
 			new String[] {
 				"M\u00E3 thu\u1ED1c", "T\u00EAn thu\u1ED1c", "H\u01B0\u1EDBng d\u1EABn"
 			},0
@@ -110,8 +147,8 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 				return columnEditables[column];
 			}});
 		model1.setRowCount(0);
-		thuocServiceImpl.getAllThuoc(model1);
-		
+			thuocServiceImpl.getAllThuoc(model1);
+
 		scrollPane.setViewportView(table);
 		
 		JLabel lblQunLBnh_1 = new JLabel("Qu\u1EA3n l\u00FD toa thu\u1ED1c");
@@ -121,7 +158,21 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 		
 		JButton btnLamMoi = new JButton("L\u00E0m m\u1EDBi");
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
 		btnLamMoi.setBounds(10, 82, 117, 23);
+
+		btnLamMoi.setBounds(10, 82, 95, 23);
+		btnLamMoi.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				model3.setRowCount(0);
+				toaThuocServiceImpl.getAllChiTietToa(model3);
+				model1.setRowCount(0);
+				thuocServiceImpl.getAllThuoc(model1);
+			}
+		});
+
 		panel.add(btnLamMoi);
 		
 		btnThem = new JButton("Th\u00EAm >>");
@@ -130,14 +181,18 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 		panel.add(btnThem);
 		
 		btnXoa = new JButton("<< Xo\u00E1 ");
+
 		btnXoa.addActionListener(this);
+
 		btnXoa.setBounds(433, 404, 89, 23);
+		btnXoa.addActionListener(this);
 		panel.add(btnXoa);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 116, 778, 133);
 		panel.add(scrollPane_1);
 		
+
 		table_1 = new JTable();
 		table_1.setModel(model2 = new DefaultTableModel(
 			new Object[][] {
@@ -147,6 +202,12 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 				"S\u1ED1 phi\u1EBFu kh\u00E1m b\u1EC7nh", "T\u00EAn b\u1EC7nh", "Ng\u00E0y l\u1EADp toa thu\u1ED1c"
 			}
 		));
+
+		String[] header= {"Mã hồ sơ","Tên bệnh nhân", "ngày lập hồ sơ"};
+		
+        dtf=new DefaultTableModel(header,0);
+		table_1 = new JTable(dtf);
+
 		table_1.getColumnModel().getColumn(0).setPreferredWidth(112);
 		table_1.getColumnModel().getColumn(2).setPreferredWidth(114);
 		scrollPane_1.setViewportView(table_1);
@@ -169,6 +230,7 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 				}});
 		scrollPane_2.setViewportView(table_2);
 		toaThuocServiceImpl.getAllChiTietToa(model3);
+
 	}
 	public void actionPerformed(ActionEvent e) {
 		int count=0;
@@ -197,5 +259,21 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 			toaThuocServiceImpl.deleteChiTiet(table_2.getValueAt(i, 0).toString());
 			model3.removeRow(i);
 		}
+
+		addHoSo();
+
 	}
+	
+	public void addHoSo() {
+		HoSoBenhAn ba = TrangChuView.HSBA;
+		if(ba != null) {
+			textField.setText(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(ba.getNgayLap()));
+			Object [] ob = {ba.getId().get(),ba.getHoTen(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(ba.getNgayLap())};
+			dtf.addRow(ob);
+			
+		}
+	}
+	
+	
+	
 }

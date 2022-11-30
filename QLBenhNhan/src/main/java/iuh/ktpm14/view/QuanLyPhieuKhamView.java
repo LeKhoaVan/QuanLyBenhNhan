@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,10 +19,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import org.bson.types.ObjectId;
+
+import iuh.ktpm14.entity.HoSoBenhAn;
+import iuh.ktpm14.service.BenhServiceImpl;
+import iuh.ktpm14.service.ChiTietPhieuKhamServiceImpl;
+import iuh.ktpm14.service.PhieuKhamServiceImpl;
+
 import javax.swing.border.TitledBorder;
 import java.awt.Component;
 
-public class QuanLyPhieuKhamView extends JPanel {
+public class QuanLyPhieuKhamView extends JPanel implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -30,6 +39,11 @@ public class QuanLyPhieuKhamView extends JPanel {
 	private JTextField textField_3;
 	private JTable table;
 	private JTextField tfBenh;
+	private DefaultTableModel dtf;
+	
+	private BenhServiceImpl benhServiceImpl= new BenhServiceImpl();
+	private PhieuKhamServiceImpl khamServiceImpl = new PhieuKhamServiceImpl();
+	private ChiTietPhieuKhamServiceImpl chiTietPhieuKhamServiceImpl = new ChiTietPhieuKhamServiceImpl();
 
 	/**
 	 * Launch the application.
@@ -91,15 +105,18 @@ public class QuanLyPhieuKhamView extends JPanel {
 		scrollPane.setBounds(10, 261, 765, 269);
 		panel.add(scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"M\u00E3 b\u1EC7nh nh\u00E2n", "T\u00EAn b\u1EC7nh nh\u00E2n", "Tri\u1EC7u ch\u1EE9ng"
-			}
-		));
+		String[] header= {"Tên bệnh nhân","số điện thoại", "Tên bệnh", "Ngày lập"};
+		
+        dtf=new DefaultTableModel(header,0);
+		table = new JTable(dtf);
+//		table.setModel(new DefaultTableModel(
+//			new Object[][] {
+//				{null, null, null},
+//			},
+//			new String[] {
+//				"M\u00E3 b\u1EC7nh nh\u00E2n", "T\u00EAn b\u1EC7nh nh\u00E2n", "Tri\u1EC7u ch\u1EE9ng"
+//			}
+//		));
 		table.getColumnModel().getColumn(0).setPreferredWidth(78);
 		table.getColumnModel().getColumn(0).setMinWidth(78);
 		table.getColumnModel().getColumn(1).setPreferredWidth(106);
@@ -163,6 +180,42 @@ public class QuanLyPhieuKhamView extends JPanel {
 		tfBenh.setColumns(10);
 		tfBenh.setBounds(239, 216, 276, 25);
 		panel.add(tfBenh);
+		
+		addHoSo();
+		doclenTBL();
 	}
+	
+	public void doclenTBL() {
+		
+//		HoSoBenhAn hoSoBenhAn = TrangChuView.HSBA;
+//		ObjectId maHoSo = TrangChuView.HSBA.getId();
+//		ObjectId maPhieu = khamServiceImpl.findByMaPhieu(maHoSo).getId();
+//		ObjectId maChiTiet = chiTietPhieuKhamServiceImpl.findBymaPhieu(maPhieu).getId();
+//		
+////		String tenBenh = benhServiceImpl.findById(maChiTiet).getTenBenh();
+//		
+//		
+//			Object [] ob = {hoSoBenhAn.getHoTen(),hoSoBenhAn.getDienThoai(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(hoSoBenhAn.getNgayLap())};
+//			dtf.addRow(ob);
+		
+		
+	}
+	
+	public void addHoSo() {
+		HoSoBenhAn ba = TrangChuView.HSBA;
+		if(ba != null) {
+			textField.setText(ba.getHoTen());
+			textField_2.setText(String.valueOf(ba.getTuoi()));
+			textField_3.setText(ba.getDienThoai());
+			
+		}
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }

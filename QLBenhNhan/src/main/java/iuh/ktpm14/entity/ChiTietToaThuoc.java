@@ -38,6 +38,6 @@ public class ChiTietToaThuoc {
 	public String toString() {
 		return "ChiTietToaThuoc [id=" + id.get() + ", thuoc=" + thuoc + ", so_luong=" + so_luong + "]";
 	}
-	
+
 	
 }
