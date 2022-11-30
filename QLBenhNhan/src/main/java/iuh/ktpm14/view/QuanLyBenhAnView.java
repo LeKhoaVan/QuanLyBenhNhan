@@ -163,5 +163,11 @@ public class QuanLyBenhAnView extends JPanel {
 		JRadioButton rdNu = new JRadioButton("N\u1EEF");
 		rdNu.setBounds(631, 114, 47, 23);
 		panel.add(rdNu);
+		
+		btnThem.addActionListener(new java.awt.event.ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+			}});
 	}
 }

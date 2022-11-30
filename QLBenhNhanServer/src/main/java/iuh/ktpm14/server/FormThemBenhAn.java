@@ -37,7 +37,7 @@ public class FormThemBenhAn extends JFrame {
 	private static JTextArea msg_area;
 
 	static ServerSocket ss;
-	static Socket s;
+	static Socket client;
 	static DataInputStream din;
 	static DataOutputStream dout;
 
@@ -58,17 +58,20 @@ public class FormThemBenhAn extends JFrame {
 		String msgin = "";
 		try {
 			ss = new ServerSocket(1201);
-            s = ss.accept();
-            
-            din = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
-            
-            while(!msgin.equals("exit")){
-                msgin = din.readUTF();
-                msg_area.setText(msg_area.getText().trim()+"\n"+msgin);
-            }
+			ss.setReuseAddress(true);
+
+			client = ss.accept();
+
+			din = new DataInputStream(client.getInputStream());
+			dout = new DataOutputStream(client.getOutputStream());
+
+			while (!msgin.equals("exit")) {
+				msgin = din.readUTF();
+				msg_area.setText(msg_area.getText().trim() + "\n" + msgin);
+			}
+
 		} catch (Exception e) {
-			
+
 		}
 	}
 
@@ -91,7 +94,7 @@ public class FormThemBenhAn extends JFrame {
 		lblTitle.setBounds(338, 33, 220, 32);
 		contentPane.add(lblTitle);
 
-		//JPanel panel_3 = new JPanel();
+		// JPanel panel_3 = new JPanel();
 		panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBorder(
@@ -99,9 +102,9 @@ public class FormThemBenhAn extends JFrame {
 		panel_3.setBounds(546, 87, 312, 335);
 		contentPane.add(panel_3);
 
-		//JTextArea msg_area = new JTextArea();
+		// JTextArea msg_area = new JTextArea();
 		msg_area = new JTextArea();
-		
+
 		msg_area.setRows(100);
 		msg_area.setForeground(new Color(0, 128, 255));
 		msg_area.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -110,7 +113,6 @@ public class FormThemBenhAn extends JFrame {
 		msg_area.setDisabledTextColor(new Color(0, 128, 255));
 		msg_area.setBounds(10, 23, 292, 301);
 		panel_3.add(msg_area);
-		
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm b\u1EC7nh \u00E1n", TitledBorder.LEADING, TitledBorder.TOP,
@@ -180,7 +182,7 @@ public class FormThemBenhAn extends JFrame {
 				try {
 					String msgout_DienThoai = msg_textDienThoai.getText() + " ";
 					String msgout_HoTen = msg_textHoTen.getText() + " ";
-					dout.writeUTF(  msgout_DienThoai + msgout_HoTen);
+					dout.writeUTF(msgout_DienThoai + msgout_HoTen);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
@@ -193,4 +195,5 @@ public class FormThemBenhAn extends JFrame {
 		panel.add(btnRefresh);
 		btnRefresh.setFont(new Font("Tahoma", Font.PLAIN, 14));
 	}
+
 }

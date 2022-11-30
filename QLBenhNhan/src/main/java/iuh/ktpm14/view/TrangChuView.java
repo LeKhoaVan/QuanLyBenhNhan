@@ -44,6 +44,7 @@ public class TrangChuView extends JFrame {
 	private JTextField textField_3;
 	private JTable table;
 	private JPanel panel_2;
+	private JPanel panel_4;
 	private static JList<String> jList_msg_area;
 
 	static Socket s;
@@ -68,7 +69,7 @@ public class TrangChuView extends JFrame {
 			}
 		});
 		try {
-			s = new Socket("127.0.0.1", 1201);
+			s = new Socket("localhost", 1201);
 			din = new DataInputStream(s.getInputStream());
 			dout = new DataOutputStream(s.getOutputStream());
 			String msgin = "";
@@ -100,6 +101,11 @@ public class TrangChuView extends JFrame {
 		panel.setBounds(0, 0, 1027, 73);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		panel_4.setBounds(10, 26, 785, 542);
+		panel_2.add(panel_4);
 
 		final JButton btnQuanLyBenhAn = new JButton("QL b\u1EC7nh \u00E1n");
 		btnQuanLyBenhAn.setForeground(new Color(255, 255, 255));
@@ -108,7 +114,7 @@ public class TrangChuView extends JFrame {
 				Object obj = e.getSource();
 				if(obj.equals(btnQuanLyBenhAn)) {
 					panel_2.removeAll();
-					panel_2.add(new QuanLyBenhAnView());
+					panel_2.add(panel_4);
 					panel_2.repaint();
 					panel_2.revalidate();
 				}
@@ -233,10 +239,10 @@ public class TrangChuView extends JFrame {
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		panel_4.setBounds(10, 26, 785, 542);
-		panel_2.add(panel_4);
+		/*
+		 * JPanel panel_4 = new JPanel(); panel_4.setLayout(null); panel_4.setBounds(10,
+		 * 26, 785, 542); panel_2.add(panel_4);
+		 */
 
 		JLabel lblTnBnhNhn = new JLabel("T\u00EAn b\u1EC7nh nh\u00E2n: ");
 		lblTnBnhNhn.setFont(new Font("Tahoma", Font.PLAIN, 16));
