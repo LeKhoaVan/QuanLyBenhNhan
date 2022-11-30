@@ -87,7 +87,7 @@ public class TrangChuView extends JFrame {
 	public TrangChuView() {
 		panel_2 = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1046, 691);
+		setBounds(100, 100, 1082, 686);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 5, 5, 10));
 
@@ -97,7 +97,7 @@ public class TrangChuView extends JFrame {
 		final JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(128, 128, 128)));
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(0, 0, 1027, 73);
+		panel.setBounds(0, 0, 1055, 73);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -204,7 +204,7 @@ public class TrangChuView extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Danh s\u00E1ch b\u1EC7nh nh\u00E2n", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
-		panel_1.setBounds(0, 73, 231, 579);
+		panel_1.setBounds(0, 73, 231, 566);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -213,7 +213,7 @@ public class TrangChuView extends JFrame {
 		jList_msg_area.setBackground(new Color(255, 255, 255));
 		jList_msg_area.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jList_msg_area.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		jList_msg_area.setBounds(10, 22, 211, 546);
+		jList_msg_area.setBounds(10, 22, 211, 533);
 
 		/*
 		 * jList_msg_area.setModel(new AbstractListModel() { String[] values = new
@@ -229,13 +229,12 @@ public class TrangChuView extends JFrame {
 		panel_2.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Qu\u1EA3n l\u00FD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(241, 73, 915, 720);
+		panel_2.setBounds(241, 73, 814, 566);
 		contentPane.add(panel_2);
-		panel_2.setLayout(null);
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
-		panel_4.setBounds(10, 26, 785, 542);
 		panel_2.add(panel_4);
 
 		JLabel lblTnBnhNhn = new JLabel("T\u00EAn b\u1EC7nh nh\u00E2n: ");

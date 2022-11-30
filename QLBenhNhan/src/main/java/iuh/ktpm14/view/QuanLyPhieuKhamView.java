@@ -19,6 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.TitledBorder;
+import java.awt.Component;
 
 public class QuanLyPhieuKhamView extends JPanel {
 
@@ -28,6 +29,7 @@ public class QuanLyPhieuKhamView extends JPanel {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTable table;
+	private JTextField tfBenh;
 
 	/**
 	 * Launch the application.
@@ -49,8 +51,9 @@ public class QuanLyPhieuKhamView extends JPanel {
 	 * Create the frame.
 	 */
 	public QuanLyPhieuKhamView() {
+		setAlignmentX(Component.RIGHT_ALIGNMENT);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1150, 810);
+		setBounds(100, 100, 900, 550);
 		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setBorder(new EmptyBorder(5,5,5,5));
@@ -150,6 +153,16 @@ public class QuanLyPhieuKhamView extends JPanel {
 		textField_3.setColumns(10);
 		textField_3.setBounds(239, 114, 276, 25);
 		panel.add(textField_3);
+		
+		JLabel lblBnh = new JLabel("Bệnh: ");
+		lblBnh.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblBnh.setBounds(125, 216, 118, 23);
+		panel.add(lblBnh);
+		
+		tfBenh = new JTextField();
+		tfBenh.setColumns(10);
+		tfBenh.setBounds(239, 216, 276, 25);
+		panel.add(tfBenh);
 	}
 
 }

@@ -1,6 +1,7 @@
 package iuh.ktpm14.entity;
 
 public class ChiTietToaThuoc {
+	private Object id;
 	private Thuoc thuoc;
 	private int so_luong;
 	public ChiTietToaThuoc() {

@@ -27,6 +27,7 @@ public class QuanLyToaThuocView extends JPanel {
 	private JTextField textField;
 	private JTable table;
 	private JTable table_1;
+	private JTable table_2;
 
 	/**
 	 * Launch the application.
@@ -101,18 +102,13 @@ public class QuanLyToaThuocView extends JPanel {
 		btnLamMoi.setBounds(10, 82, 95, 23);
 		panel.add(btnLamMoi);
 		
-		JList list = new JList();
-		list.setBorder(new TitledBorder(null, "Thu\u1ED1c \u0111\u01B0\u1EE3c ch\u1ECDn", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		list.setBounds(532, 261, 256, 380);
-		panel.add(list);
+		JButton btnThem = new JButton("Th\u00EAm >>");
+		btnThem.setBounds(433, 359, 89, 23);
+		panel.add(btnThem);
 		
-		JButton btnNewButton = new JButton("Th\u00EAm >>");
-		btnNewButton.setBounds(433, 359, 89, 23);
-		panel.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("<< Xo\u00E1 ");
-		btnNewButton_1.setBounds(433, 404, 89, 23);
-		panel.add(btnNewButton_1);
+		JButton btnXoa = new JButton("<< Xo\u00E1 ");
+		btnXoa.setBounds(433, 404, 89, 23);
+		panel.add(btnXoa);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 116, 778, 133);
@@ -130,5 +126,13 @@ public class QuanLyToaThuocView extends JPanel {
 		table_1.getColumnModel().getColumn(0).setPreferredWidth(112);
 		table_1.getColumnModel().getColumn(2).setPreferredWidth(114);
 		scrollPane_1.setViewportView(table_1);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Thu\u1ED1c \u0111\u01B0\u1EE3c ch\u1ECDn", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		scrollPane_2.setBounds(532, 261, 256, 380);
+		panel.add(scrollPane_2);
+		
+		table_2 = new JTable();
+		scrollPane_2.setViewportView(table_2);
 	}
 }
