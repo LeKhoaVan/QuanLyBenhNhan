@@ -1,7 +1,9 @@
 package iuh.ktpm14.entity;
 
+import org.bson.types.ObjectId;
+
 public class Thuoc {
-	private Object _id;
+	private ObjectId _id;
 	private String ten_thuoc;
 	private String huong_dan;
 	
@@ -15,11 +17,11 @@ public class Thuoc {
 		this.huong_dan = huong_dan;
 	}
 
-	public Object getId() {
+	public ObjectId getId() {
 		return _id;
 	}
 
-	public void setId(Object id) {
+	public void setId(ObjectId id) {
 		this._id = id;
 	}
 
@@ -41,7 +43,7 @@ public class Thuoc {
 
 	@Override
 	public String toString() {
-		return "Thuoc [id=" + _id + ", ten_thuoc=" + ten_thuoc + ", huong_dan=" + huong_dan + "]";
+		return "Thuoc [id=" + _id.get() + ", ten_thuoc=" + ten_thuoc + ", huong_dan=" + huong_dan + "]";
 	}
 
 	

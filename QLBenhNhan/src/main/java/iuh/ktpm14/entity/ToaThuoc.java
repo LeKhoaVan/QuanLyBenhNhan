@@ -3,8 +3,10 @@ package iuh.ktpm14.entity;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 public class ToaThuoc {
-	private Object _id;
+	private ObjectId _id;
 	private Date ngay_lap;
 //	private Benh benh;
 //	private PhieuKhamBenh phieuKham;
@@ -19,10 +21,10 @@ public class ToaThuoc {
 		this.ngay_lap = new Date();
 		this.chiTietToaThuocs = chiTietToaThuocs;
 	}
-	public Object get_id() {
+	public ObjectId get_id() {
 		return _id;
 	}
-	public void set_id(Object _id) {
+	public void set_id(ObjectId _id) {
 		this._id = _id;
 	}
 	public Date getNgay_lap() {
@@ -39,7 +41,7 @@ public class ToaThuoc {
 	}
 	@Override
 	public String toString() {
-		return "ToaThuoc [_id=" + _id + ", ngay_lap=" + ngay_lap + ", chiTietToaThuocs=" + chiTietToaThuocs + "]";
+		return "ToaThuoc [_id=" + _id.get() + ", ngay_lap=" + ngay_lap + ", chiTietToaThuocs=" + chiTietToaThuocs + "]";
 	}
 	
 	
