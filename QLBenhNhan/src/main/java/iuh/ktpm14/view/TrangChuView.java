@@ -44,6 +44,7 @@ public class TrangChuView extends JFrame {
 	private JTextField textField_3;
 	private JTable table;
 	private JPanel panel_2;
+	private JPanel panel_4;
 	private static JList<String> jList_msg_area;
 
 	static Socket s;
@@ -100,6 +101,10 @@ public class TrangChuView extends JFrame {
 		panel.setBounds(0, 0, 1055, 73);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		panel_2.add(panel_4);
 
 		final JButton btnQuanLyBenhAn = new JButton("QL b\u1EC7nh \u00E1n");
 		btnQuanLyBenhAn.setForeground(new Color(255, 255, 255));
@@ -108,7 +113,7 @@ public class TrangChuView extends JFrame {
 				Object obj = e.getSource();
 				if(obj.equals(btnQuanLyBenhAn)) {
 					panel_2.removeAll();
-					panel_2.add(new QuanLyBenhAnView());
+					panel_2.add(panel_4);
 					panel_2.repaint();
 					panel_2.revalidate();
 				}
@@ -233,9 +238,9 @@ public class TrangChuView extends JFrame {
 		contentPane.add(panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		panel_2.add(panel_4);
+		/*
+		 * JPanel panel_4 = new JPanel(); panel_4.setLayout(null); panel_2.add(panel_4);
+		 */
 
 		JLabel lblTnBnhNhn = new JLabel("T\u00EAn b\u1EC7nh nh\u00E2n: ");
 		lblTnBnhNhn.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -328,18 +333,5 @@ public class TrangChuView extends JFrame {
 		textField_3.setColumns(10);
 		textField_3.setBounds(239, 114, 276, 25);
 		panel_4.add(textField_3);
-
-		JLabel lblGiiTnh = new JLabel("Gi\u1EDBi t\u00EDnh: ");
-		lblGiiTnh.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblGiiTnh.setBounds(545, 99, 80, 20);
-		panel_4.add(lblGiiTnh);
-
-		JRadioButton rdNam = new JRadioButton("Nam");
-		rdNam.setBounds(631, 82, 47, 23);
-		panel_4.add(rdNam);
-
-		JRadioButton rdNu = new JRadioButton("N\u1EEF");
-		rdNu.setBounds(631, 114, 47, 23);
-		panel_4.add(rdNu);
 	}
 }
