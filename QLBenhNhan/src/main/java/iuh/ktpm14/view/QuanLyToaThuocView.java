@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +22,8 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import iuh.ktpm14.entity.HoSoBenhAn;
+
 public class QuanLyToaThuocView extends JPanel {
 
 	private JPanel contentPane;
@@ -28,6 +31,7 @@ public class QuanLyToaThuocView extends JPanel {
 	private JTable table;
 	private JTable table_1;
 	private JTable table_2;
+	private DefaultTableModel dtf;
 
 	/**
 	 * Launch the application.
@@ -114,15 +118,19 @@ public class QuanLyToaThuocView extends JPanel {
 		scrollPane_1.setBounds(10, 116, 778, 133);
 		panel.add(scrollPane_1);
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"S\u1ED1 phi\u1EBFu kh\u00E1m b\u1EC7nh", "T\u00EAn b\u1EC7nh", "Ng\u00E0y l\u1EADp toa thu\u1ED1c"
-			}
-		));
+		
+		String[] header= {"Mã hồ sơ","Tên bệnh nhân", "ngày lập hồ sơ"};
+		
+        dtf=new DefaultTableModel(header,0);
+		table_1 = new JTable(dtf);
+//		table_1.setModel(new DefaultTableModel(
+//			new Object[][] {
+//				{null, null, null},
+//			},
+//			new String[] {
+//				"S\u1ED1 phi\u1EBFu kh\u00E1m b\u1EC7nh", "T\u00EAn b\u1EC7nh", "Ng\u00E0y l\u1EADp toa thu\u1ED1c"
+//			}
+//		));
 		table_1.getColumnModel().getColumn(0).setPreferredWidth(112);
 		table_1.getColumnModel().getColumn(2).setPreferredWidth(114);
 		scrollPane_1.setViewportView(table_1);
@@ -134,5 +142,18 @@ public class QuanLyToaThuocView extends JPanel {
 		
 		table_2 = new JTable();
 		scrollPane_2.setViewportView(table_2);
+		addHoSo();
 	}
+	
+	public void addHoSo() {
+		HoSoBenhAn ba = TrangChuView.HSBA;
+		if(ba != null) {
+			textField.setText(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(ba.getNgayLap()));
+			Object [] ob = {ba.getId().get(),ba.getHoTen(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(ba.getNgayLap())};
+			dtf.addRow(ob);
+			
+		}
+	}
+	
+	
 }

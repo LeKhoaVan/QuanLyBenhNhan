@@ -6,8 +6,8 @@ import java.util.List;
 public class ToaThuoc {
 	private Object _id;
 	private Date ngay_lap;
-//	private Benh benh;
-//	private PhieuKhamBenh phieuKham;
+	private Benh benh;
+	private PhieuKham phieuKham;
 	private List<ChiTietToaThuoc> chiTietToaThuocs;
 	public ToaThuoc() {
 		super();
