@@ -24,7 +24,7 @@ import iuh.ktpm14.connect.ConnectDB;
 import iuh.ktpm14.entity.Thuoc;
 
 public class ThuocServiceImpl implements ThuocService{
-
+//
 	public List<Thuoc> getAllThuoc(DefaultTableModel table) {
 		ConnectDB connectDB = new ConnectDB();
 		MongoClient client = connectDB.connect();
@@ -42,6 +42,22 @@ public class ThuocServiceImpl implements ThuocService{
 			vector.add(document.getString("ten_thuoc"));
 			vector.add(document.getString("huong_dan"));
 			table.addRow(vector);
+		}
+		return list;
+	}
+	public List<Thuoc> getAllThuoc() {
+		ConnectDB connectDB = new ConnectDB();
+		MongoClient client = connectDB.connect();
+		MongoDatabase database = connectDB.createDatabase(client, "QLKhamBenh");
+		MongoCollection<Document> collection = database.getCollection("Thuoc");
+		
+		FindIterable<Document> fi = collection.find();
+		Iterator<Document> it = fi.iterator();
+		Gson gson = new Gson();
+		List<Thuoc> list = new ArrayList<Thuoc>();
+		while (it.hasNext()) {
+			Thuoc thuoc = gson.fromJson(it.next().toJson(), Thuoc.class);
+			list.add(thuoc);
 		}
 		return list;
 	}
@@ -66,7 +82,7 @@ public class ThuocServiceImpl implements ThuocService{
 		return false;
 	}
 	
-	public Thuoc getThuocById(String id, DefaultTableModel table) {
+	public Thuoc getThuocById(String id) {
 		ConnectDB connectDB = new ConnectDB();
 		MongoClient client = connectDB.connect();
 		MongoDatabase database = connectDB.createDatabase(client, "QLKhamBenh");
@@ -74,6 +90,23 @@ public class ThuocServiceImpl implements ThuocService{
 		
 		
 		FindIterable<Document> fi = collection.find(Filters.eq("_id", new ObjectId(id)));
+		Iterator<Document> it = fi.iterator();
+		Gson gson = new Gson();
+		Thuoc thuoc = null;
+		while (it.hasNext()) {
+			thuoc = gson.fromJson(it.next().toJson(), Thuoc.class);
+		}
+		return thuoc;
+	}
+	
+	public Thuoc getThuocByName(String name, DefaultTableModel table) {
+		ConnectDB connectDB = new ConnectDB();
+		MongoClient client = connectDB.connect();
+		MongoDatabase database = connectDB.createDatabase(client, "QLKhamBenh");
+		MongoCollection<Document> collection = database.getCollection("Thuoc");
+		
+		
+		FindIterable<Document> fi = collection.find(Filters.eq("ten_thuoc", name));
 		Iterator<Document> it = fi.iterator();
 		Gson gson = new Gson();
 		Thuoc thuoc = null;
@@ -87,6 +120,7 @@ public class ThuocServiceImpl implements ThuocService{
 		}
 		return thuoc;
 	}
+	
 	
 	public Thuoc update(String id, Thuoc newThuoc) {
 		ConnectDB connectDB = new ConnectDB();

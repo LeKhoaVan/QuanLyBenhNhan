@@ -154,23 +154,10 @@ public class FormThemBenhAn extends JFrame implements ActionListener{
 		panel.add(msg_textDiaChi);
 		msg_textDiaChi.setColumns(10);
 
-		JLabel lblGiiTnh = new JLabel("Gi\u1EDBi t\u00EDnh: ");
-		lblGiiTnh.setBounds(398, 125, 80, 20);
-		panel.add(lblGiiTnh);
-		lblGiiTnh.setFont(new Font("Tahoma", Font.BOLD, 16));
-
 		JLabel lblaCh = new JLabel("\u0110\u1ECBa ch\u1EC9: ");
 		lblaCh.setBounds(21, 86, 105, 20);
 		panel.add(lblaCh);
 		lblaCh.setFont(new Font("Tahoma", Font.BOLD, 16));
-
-		JRadioButton rdNam = new JRadioButton("Nam");
-		rdNam.setBounds(484, 111, 47, 23);
-		panel.add(rdNam);
-
-		JRadioButton rdNu = new JRadioButton("N\u1EEF");
-		rdNu.setBounds(484, 132, 47, 23);
-		panel.add(rdNu);
 
 		msg_textDienThoai = new JTextField();
 		msg_textDienThoai.setBounds(21, 191, 294, 29);

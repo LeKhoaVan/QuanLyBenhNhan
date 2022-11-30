@@ -351,19 +351,6 @@ public class TrangChuView extends JFrame implements ActionListener, MouseListene
 		textField_sodt.setColumns(10);
 		textField_sodt.setBounds(239, 114, 276, 25);
 		panel_4.add(textField_sodt);
-
-		JLabel lblGiiTnh = new JLabel("Gi\u1EDBi t\u00EDnh: ");
-		lblGiiTnh.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblGiiTnh.setBounds(545, 99, 80, 20);
-		panel_4.add(lblGiiTnh);
-
-		JRadioButton rdNam = new JRadioButton("Nam");
-		rdNam.setBounds(631, 82, 47, 23);
-		panel_4.add(rdNam);
-
-		JRadioButton rdNu = new JRadioButton("N\u1EEF");
-		rdNu.setBounds(631, 114, 47, 23);
-		panel_4.add(rdNu);
 		
 		docLenTBL();
 		

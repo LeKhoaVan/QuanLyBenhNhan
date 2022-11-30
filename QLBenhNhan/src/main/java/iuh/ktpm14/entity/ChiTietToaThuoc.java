@@ -1,7 +1,9 @@
 package iuh.ktpm14.entity;
 
+import org.bson.types.ObjectId;
+
 public class ChiTietToaThuoc {
-	private Object id;
+	private ObjectId id;
 	private Thuoc thuoc;
 	private int so_luong;
 	public ChiTietToaThuoc() {
@@ -24,6 +26,17 @@ public class ChiTietToaThuoc {
 	}
 	public void setSo_luong(int so_luong) {
 		this.so_luong = so_luong;
+	}
+	
+	public ObjectId getId() {
+		return id;
+	}
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "ChiTietToaThuoc [id=" + id.get() + ", thuoc=" + thuoc + ", so_luong=" + so_luong + "]";
 	}
 	
 	
