@@ -8,8 +8,8 @@ import org.bson.types.ObjectId;
 public class ToaThuoc {
 	private ObjectId _id;
 	private Date ngay_lap;
-//	private Benh benh;
-//	private PhieuKhamBenh phieuKham;
+	private Benh benh;
+	private PhieuKham phieuKham;
 	private List<ChiTietToaThuoc> chiTietToaThuocs;
 	public ToaThuoc() {
 		super();
@@ -42,6 +42,18 @@ public class ToaThuoc {
 	@Override
 	public String toString() {
 		return "ToaThuoc [_id=" + _id.get() + ", ngay_lap=" + ngay_lap + ", chiTietToaThuocs=" + chiTietToaThuocs + "]";
+	}
+	public Benh getBenh() {
+		return benh;
+	}
+	public void setBenh(Benh benh) {
+		this.benh = benh;
+	}
+	public PhieuKham getPhieuKham() {
+		return phieuKham;
+	}
+	public void setPhieuKham(PhieuKham phieuKham) {
+		this.phieuKham = phieuKham;
 	}
 	
 	
