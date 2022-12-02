@@ -55,32 +55,15 @@ public class BenhServiceImpl implements BenhService{
 	    return null;
 	}
 
-	@Override
-	public Benh findByName(String name) {
-		OgmSession session = sessionFactory.getCurrentSession();
-	    Transaction tr = session.getTransaction();
-	    try {
-	    	String queryString = "db.benhs.find({tenBenh: '" + name + "'})";
-	      tr.begin();
-	      List<Benh> benhs = session.createNativeQuery(queryString, Benh.class).getResultList();
-	      benhs.forEach(x -> System.out.println("findByName: " + x + " benh: " + benhs.get(0)));
-	      tr.commit();
-	      return benhs.get(0);
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	      System.out.println("No data available!");
-	      tr.rollback();
-	    }
-	    return null;
-	}
-
+	
 	@Override
 	public Benh findById(String id) {
 		OgmSession session = sessionFactory.getCurrentSession();
 	    Transaction tr = session.getTransaction();
+	    Benh benh = new Benh();
 	    try {
 	      tr.begin();
-	      Benh benh = session.find(Benh.class, id);
+	      benh = session.find(Benh.class, id);
 	      System.out.println("findById: " + id + " - Benh: " + benh);
 	      tr.commit();
 	      return benh;
@@ -118,13 +101,39 @@ public class BenhServiceImpl implements BenhService{
 	}
 	
 	@Override
+	public Benh findByName(String name) {
+		OgmSession session = sessionFactory.getCurrentSession();
+	    Transaction tr = session.getTransaction();
+	    try {
+	    	String queryString = "db.benhs.find({tenBenh: '" + name + "'})";
+	      tr.begin();
+	      List<Benh> benhs = session.createNativeQuery(queryString, Benh.class).getResultList();
+	      benhs.forEach(x -> System.out.println("findByName: " + x + " benh: " + benhs.get(0)));
+	      tr.commit();
+	      return benhs.get(0);
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	      System.out.println("No data available!");
+	      tr.rollback();
+	    }
+	    return null;
+	}
+
+	
+	@Override
 	public String deleteByName(String name) {
 		OgmSession session = sessionFactory.getCurrentSession();
 	    Transaction tr = session.getTransaction();
-
+	    
+	    
 		try {
 			tr.begin();
-			Benh benhDelete = findByName(name);
+			
+			Benh benhDelete = new Benh();
+	
+			benhDelete = findByName(name);
+			
+			System.out.println("KQ2: "+benhDelete);
 			if (!Objects.isNull(benhDelete)) {
 				session.delete(benhDelete);
 			} else {

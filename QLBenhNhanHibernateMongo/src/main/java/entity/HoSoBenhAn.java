@@ -47,6 +47,15 @@ public class HoSoBenhAn {
 		this.ngayLap = ngayLap;
 	}
 	
+	public HoSoBenhAn(String id, String hoTen, int tuoi, String diaChi, String dienThoai) {
+		this.id = id;
+		this.hoTen = hoTen;
+		this.tuoi = tuoi;
+		this.diaChi = diaChi;
+		this.dienThoai = dienThoai;
+		this.ngayLap = ngayLap;
+	}
+	
 	public HoSoBenhAn(String hoTen, int tuoi, String diaChi, String dienThoai) {
 		this.hoTen = hoTen;
 		this.tuoi = tuoi;

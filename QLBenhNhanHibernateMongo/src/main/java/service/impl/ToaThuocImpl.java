@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.ogm.OgmSession;
 import org.hibernate.ogm.OgmSessionFactory;
 
+import entity.ChiTietPhieuKham;
 import entity.ToaThuoc;
 import service.ToaThuocService;
 import util.Connect;
@@ -70,5 +71,30 @@ public class ToaThuocImpl implements ToaThuocService{
 	    }
 	    return null;
 	}
+	
+	@Override
+	public ToaThuoc findByIdPK(String idPK) {
+		OgmSession session = sessionFactory.getCurrentSession();
+	    Transaction tr = session.getTransaction();
+	    System.out.println(idPK+ "  ben chi tiet");
+	    try {
+	    	String queryString = "db.toaThuocs.find({chiTietPhieuKham_id: '" + idPK + "'})";
+	      tr.begin();
+
+	      List<ToaThuoc> chiTietPK = session.createNativeQuery(queryString, ToaThuoc.class).getResultList();
+	      
+	      chiTietPK.forEach(x -> System.out.println("findByIdPhieuKham: " + x));
+	      tr.commit();
+	      
+	      return chiTietPK.get(0);
+	      
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	      System.out.println("No data available! findByIdPhieuKham");
+	      tr.rollback();
+	    }
+	    return null;
+	}
+	
 
 }

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "benhs")
 public class Benh implements Serializable{
@@ -28,6 +30,10 @@ public class Benh implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	
+	
+	
 
 	@Id
     @GeneratedValue(generator = "uuid")
@@ -44,3 +50,5 @@ public class Benh implements Serializable{
 		return "Benh [id=" + id + ", tenBenh=" + tenBenh + "]";
 	}
 }
+
+

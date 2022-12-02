@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.ogm.OgmSession;
 import org.hibernate.ogm.OgmSessionFactory;
 
+import entity.ChiTietPhieuKham;
 import entity.ChiTietToaThuoc;
 import entity.HoSoBenhAn;
 import service.ChiTietToaThuocService;
@@ -70,6 +71,30 @@ public class ChiTietToaThuocImpl implements ChiTietToaThuocService{
 	      tr.rollback();
 	    }
 	    return null;
+	}
+	
+	
+	@Override
+	public List<ChiTietToaThuoc> findByIdToaThuoc(String idToaThuoc) {
+		OgmSession session = sessionFactory.getCurrentSession();
+	    Transaction tr = session.getTransaction();
+	    System.out.println(idToaThuoc+ "  ben chi tiet");
+	    try {
+	    	String queryString = "db.chiTietToaThuocs.find({toaThuoc_id: '" + idToaThuoc + "'})";
+	      tr.begin();
+	      
+	      List<ChiTietToaThuoc> chiTietPK = session.createNativeQuery(queryString, ChiTietToaThuoc.class).getResultList();
+	      
+	      chiTietPK.forEach(x -> System.out.println("findByIdHoSo: " + x));
+	      tr.commit();
+	      return chiTietPK;
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	      System.out.println("No data available! findByIdHoSo");
+	      tr.rollback();
+	    }
+	    return null;
+	
 	}
 
 }

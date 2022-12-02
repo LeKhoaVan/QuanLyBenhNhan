@@ -8,4 +8,6 @@ public interface ToaThuocService {
 	public boolean createToaThuoc(ToaThuoc toaThuoc);
 	public List<ToaThuoc> findAll();
 	public ToaThuoc findById(String id);
+	
+	public ToaThuoc findByIdPK(String idPK);
 }

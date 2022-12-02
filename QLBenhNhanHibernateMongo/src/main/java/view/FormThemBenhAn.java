@@ -1,4 +1,4 @@
-package iuh.ktpm14.server;
+package view;
 
 import java.awt.EventQueue;
 
@@ -6,8 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -21,31 +19,18 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
-
-import iuh.ktpm14.entity.HoSoBenhAn;
-import iuh.ktpm14.service.HoSoBenhAnImpl;
-import iuh.ktpm14.service.HoSoBenhAnService;
-
-
 import javax.swing.JTextArea;
 import java.awt.Color;
 
-public class FormThemBenhAn extends JFrame implements ActionListener{
+public class FormThemBenhAn extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField msg_textHoTen;
 	private JTextField msg_textTuoi;
 	private JTextField msg_textDienThoai;
 	private JTextField msg_textDiaChi;
 	private JPanel panel_3;
-	private JButton btnSend;
 	private static JTextArea msg_area;
-	
-	private HoSoBenhAnService benhAnService = new HoSoBenhAnImpl();
 
 	static ServerSocket ss;
 	static Socket s;
@@ -79,7 +64,7 @@ public class FormThemBenhAn extends JFrame implements ActionListener{
                 msg_area.setText(msg_area.getText().trim()+"\n"+msgin);
             }
 		} catch (Exception e) {
-			
+			// TODO: handle exception
 		}
 	}
 
@@ -155,10 +140,23 @@ public class FormThemBenhAn extends JFrame implements ActionListener{
 		panel.add(msg_textDiaChi);
 		msg_textDiaChi.setColumns(10);
 
+		JLabel lblGiiTnh = new JLabel("Gi\u1EDBi t\u00EDnh: ");
+		lblGiiTnh.setBounds(398, 125, 80, 20);
+		panel.add(lblGiiTnh);
+		lblGiiTnh.setFont(new Font("Tahoma", Font.BOLD, 16));
+
 		JLabel lblaCh = new JLabel("\u0110\u1ECBa ch\u1EC9: ");
 		lblaCh.setBounds(21, 86, 105, 20);
 		panel.add(lblaCh);
 		lblaCh.setFont(new Font("Tahoma", Font.BOLD, 16));
+
+		JRadioButton rdNam = new JRadioButton("Nam");
+		rdNam.setBounds(484, 111, 47, 23);
+		panel.add(rdNam);
+
+		JRadioButton rdNu = new JRadioButton("N\u1EEF");
+		rdNu.setBounds(484, 132, 47, 23);
+		panel.add(rdNu);
 
 		msg_textDienThoai = new JTextField();
 		msg_textDienThoai.setBounds(21, 191, 294, 29);
@@ -170,50 +168,25 @@ public class FormThemBenhAn extends JFrame implements ActionListener{
 		panel.add(lblPhone);
 		lblPhone.setFont(new Font("Tahoma", Font.BOLD, 16));
 
-		btnSend = new JButton("G\u1EEDi t\u1EDBi b\u00E1c s\u0129");
+		JButton btnSend = new JButton("G\u1EEDi t\u1EDBi b\u00E1c s\u0129");
 		btnSend.setBounds(133, 240, 130, 35);
 		panel.add(btnSend);
+		btnSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String msgout_DienThoai = msg_textDienThoai.getText() + " ";
+					String msgout_HoTen = msg_textHoTen.getText() + " ";
+					dout.writeUTF(  msgout_DienThoai + msgout_HoTen);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		btnSend.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton btnRefresh = new JButton("L\u00E0m m\u1EDBi");
 		btnRefresh.setBounds(316, 240, 105, 35);
 		panel.add(btnRefresh);
 		btnRefresh.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		btnSend.addActionListener(this);
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		Object o = e.getSource();
-		if(o.equals(btnSend)) {
-			String hoten = msg_textHoTen.getText();
-			int tuoi = Integer.parseInt(msg_textTuoi.getText());
-			String sdt = msg_textDienThoai.getText();
-			String diaChi = msg_textDiaChi.getText();
-			HoSoBenhAn benhAn = new HoSoBenhAn(hoten, tuoi, diaChi, sdt);
-			
-			try {
-				String msgout_DienThoai = msg_textDienThoai.getText() + " ";
-				String msgout_HoTen = msg_textHoTen.getText() + " ";
-				dout.writeUTF(  msgout_DienThoai + msgout_HoTen);
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-			
-			if(benhAnService.findByPhoneNumber(sdt) == null) {
-				if(benhAnService.createHoSoBenhAn(benhAn))
-				JOptionPane.showMessageDialog(this,"Thêm thành công");
-			}
-			else {
-				JOptionPane.showMessageDialog(this,"Bệnh nhân đã có trong hệ thống");	
-			}
-			
-			msg_textHoTen.setText("");
-			msg_textTuoi.setText("");
-			msg_textDienThoai.setText("");
-			msg_textDiaChi.setText("");
-			
-		}
-		
 	}
 }

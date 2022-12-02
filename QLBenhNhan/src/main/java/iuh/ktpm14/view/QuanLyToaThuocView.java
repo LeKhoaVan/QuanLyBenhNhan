@@ -119,7 +119,7 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 		btnXutPhiuKhm.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnXutPhiuKhm.addActionListener(new ActionListener() {
 			
-			@Override
+		
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				

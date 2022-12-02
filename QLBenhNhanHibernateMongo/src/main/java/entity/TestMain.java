@@ -70,6 +70,7 @@ public class TestMain {
 			ChiTietToaThuoc chiTietToaThuoc = new ChiTietToaThuoc();
 			chiTietToaThuoc.setSoLuong(8 + i);
 			chiTietToaThuoc.setThuoc(thuocImpl.findAll().get(i));
+//			chiTietToaThuoc.setToaThuoc(thuocToaThuocImpl.findByIdPK(null));
 			chiTietToaThuocImpl.createChiTietToaThuoc(chiTietToaThuoc);
 		}
 		

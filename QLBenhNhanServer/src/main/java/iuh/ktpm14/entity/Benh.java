@@ -1,5 +1,6 @@
-package entity;
+package iuh.ktpm14.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,21 +24,31 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "thuocs")
-public class Thuoc {
+@Table(name = "benhs")
+public class Benh implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	
+	
+
 	@Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-	private String tenThuoc;
-	private String huongDanSuDung;
 	
-	@OneToMany(mappedBy = "thuoc", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<ChiTietToaThuoc> chiTietToaThuocs = new ArrayList<>();
+	private String tenBenh;
 	
+	@OneToMany(mappedBy = "benh", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ChiTietPhieuKham> chiTietPhieuKhams = new ArrayList<>();
 	
 	@Override
 	public String toString() {
-		return "Thuoc [id=" + id + ", tenThuoc=" + tenThuoc + ", huongDanSuDung=" + huongDanSuDung + "]";
+		return "Benh [id=" + id + ", tenBenh=" + tenBenh + "]";
 	}
 }
+
+

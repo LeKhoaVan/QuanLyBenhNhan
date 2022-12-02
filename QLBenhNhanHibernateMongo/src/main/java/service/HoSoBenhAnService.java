@@ -13,4 +13,5 @@ public interface HoSoBenhAnService {
 	public boolean updateHoSoBenhAn(HoSoBenhAn hoSoBenhAn);
 	public String deleteByName(String name);
 	public String deleteById(String id);
+
 }
