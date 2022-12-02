@@ -272,8 +272,33 @@ public class QuanLyToaThuocView extends JPanel implements ActionListener{
 			dtfThuocChon.removeRow(rowBenh);
 		}
 		if(o.equals(btnXuatPhieu)) {
-
-			//			Tôi Bị lỗi phần này 
+			chiTietPhieuKhamService.findByIdHoSo(hoSoBenhAnNew.getId()).forEach(ct -> {
+				ToaThuoc toaThuoc = new ToaThuoc();
+				
+				if(toaThuocService.findByIdPK(ct.getId()) == null) {
+					toaThuoc.setChiTietPhieuKham(ct);
+					toaThuoc.setNgayLap(new Date());	
+					toaThuocService.createToaThuoc(toaThuoc);
+				}
+				
+				
+				if(chiTietToaThuocService.findByIdToaThuoc(toaThuocService.findByIdPK(ct.getId()).getId())!=null) {
+					 int rows = dtfThuocChon.getRowCount(); 
+			         for(int i = rows - 1; i >=0; i--){
+						ChiTietToaThuoc chiTietToaThuoc = new ChiTietToaThuoc();
+						chiTietToaThuoc.setThuoc(thuocService.findById(dtfThuocChon.getValueAt(i, 0).toString()));
+						chiTietToaThuoc.setToaThuoc(toaThuocService.findByIdPK(ct.getId()));
+						
+						chiTietToaThuocService.createChiTietToaThuoc(chiTietToaThuoc);
+						
+						System.out.print("1213343565787");
+						System.out.print(chiTietToaThuocService.findByIdToaThuoc(toaThuocService.findByIdPK(ct.getId()).getId()));
+				     }
+				}
+			});
+			
+			
+			
 			
 			
 		}
